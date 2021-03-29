@@ -2,8 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import CoursesIndex from './views/courses/Index'
+import CoursesCreate from './views/courses/Create'
 import EnrolmentsIndex from './views/enrolments/Index'
 import LecturersIndex from './views/lecturers/Index'
+import LecturersCreate from './views/lecturers/Create'
+
 Vue.use(Router)
 
 export default new Router ({
@@ -23,6 +26,12 @@ export default new Router ({
         },
 
         {
+        path:'/courses/create',
+        name: 'courses_create',
+        component: CoursesCreate
+        },
+
+        {
         path:'/enrolments',
         name: 'enrolments_index',
         component: EnrolmentsIndex
@@ -33,5 +42,13 @@ export default new Router ({
         name: 'lecturers_index',
         component: LecturersIndex
         },
+
+        {
+        path:'/lecturers/create',
+        name: 'lecturers_create',
+        component: LecturersCreate
+        },
+        
+
     ]
 });

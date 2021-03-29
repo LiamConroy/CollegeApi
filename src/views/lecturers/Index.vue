@@ -4,7 +4,8 @@
         This is the Lecturers page
         <br>
         <button class = "mr-5" @click="getLecturers()">Get Lecturers</button>
-        <button class = "ml-5" @click="logout()">Logout</button>
+        <button class = "" @click="logout()">Logout</button>
+        <button class = "ml-5" @click="toCreate()">Add Lecturer</button>
         </b-col>
 
         <b-row>
@@ -34,6 +35,8 @@
                          <th scope ="col">Name</th>
                          <th scope ="col">Email Address</th>
                          <th scope ="col">Phone Number</th>
+                         <th scope ="col"></th>
+                         <th scope ="col"></th>
                       </tr>
                  </thead>
                     
@@ -42,7 +45,10 @@
                      <tr>
                          <td>{{lecturer.name}}</td>
                          <td>{{lecturer.email}}</td>
-                         <td>{{lecturer.phone}}</td> 
+                         <td>{{lecturer.phone}}</td>
+
+                         <td><b-button class = "float-right" variant="primary">Edit</b-button></td>
+                         <td><b-button class = "float-right" variant="danger">Delete</b-button></td> 
                      </tr>
                 </tbody>
              </table>
@@ -87,6 +93,10 @@ import axios from 'axios'
 
                 console.log(error.response.data)
             })  
+         },
+
+        toCreate(){
+             this.$router.push('/lecturers/create');
          },
 
          logout() {
