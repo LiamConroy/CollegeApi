@@ -49,10 +49,9 @@
                          <td>{{course.code}}</td>
                          <td>{{course.description}}</td> 
                          <td><b-button class = "float-right" variant="primary">Edit</b-button></td>
-                         <td><b-button name ="delete" class = "float-right" variant="danger" @click ="deleteCourse(courses.id)">Delete</b-button></td>
+                         <td><b-button name ="delete" class = "float-right" variant="danger" @click.prevent ="deleteCourse(course.id)">Delete</b-button></td>
                      </tr>
              
-                     
 
                 </tbody>
              </table>
@@ -103,12 +102,18 @@ import axios from 'axios'
              this.$router.push('/courses/create');
          },
 
-         deleteCourse(id){
-            // let token = localStorage.getItem('token');
+         deleteCourse:function(id){
+            let token = localStorage.getItem('token');
 
-             alert("deleting");
-             axios.delete('http://college.api:8000/api/courses/', +id )
-
+            confirm('Are you sure you want to delete ${name}');
+             //Window.confirm("Are you sure you want to delete this course?");
+            //  axios.delete('http://college.api:8000/api/courses/', +id )
+            
+            axios.delete('http://college.api:8000/api/courses/'+id,
+            {headers: {Authorization: "Bearer " + token}},
+            {action:'destroy'
+            })
+            
              .then(response => {
                 console.log(response.data);
                 // default is nothing

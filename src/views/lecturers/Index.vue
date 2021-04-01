@@ -48,7 +48,7 @@
                          <td>{{lecturer.phone}}</td>
 
                          <td><b-button class = "float-right" variant="primary">Edit</b-button></td>
-                         <td><b-button class = "float-right" variant="danger">Delete</b-button></td> 
+                         <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteCourse(lecturer.id)">Delete</b-button></td> 
                      </tr>
                 </tbody>
              </table>
@@ -59,6 +59,7 @@
 
 <script>
 import axios from 'axios'
+
 
     export default {
         name: 'LecturerIndex',
@@ -93,6 +94,31 @@ import axios from 'axios'
 
                 console.log(error.response.data)
             })  
+         },
+
+         deleteCourse:function(id){
+            let token = localStorage.getItem('token');
+
+             //Window.confirm("Are you sure you want to delete this course?");
+            //  axios.delete('http://college.api:8000/api/courses/', +id )
+            
+            axios.delete('http://college.api:8000/api/lecturers/'+id,
+            {headers: {Authorization: "Bearer " + token}},
+            {action:'destroy'
+            })
+            
+             .then(response => {
+                console.log(response.data);
+                // default is nothing
+                this.courses = response.data.data
+            })
+
+            .catch(error => {
+                console.log(error)
+
+                console.log(error.response.data)
+            })  
+
          },
 
         toCreate(){

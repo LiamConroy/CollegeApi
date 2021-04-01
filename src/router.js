@@ -8,6 +8,7 @@ import LecturersIndex from './views/lecturers/Index'
 import LecturersCreate from './views/lecturers/Create'
 
 Vue.use(Router)
+// Vue.forceUpdate();
 
 export default new Router ({
     mode: 'history',

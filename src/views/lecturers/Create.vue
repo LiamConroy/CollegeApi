@@ -151,8 +151,6 @@ import axios from 'axios'
              let token = localStorage.getItem('token');
 
              //axios.get('http://college.api:8000/api/courses',{
-               
-          
 
              alert("adding davinki");
 
@@ -162,7 +160,6 @@ import axios from 'axios'
                  email:this.form.email,
                  phone:this.form.phone  
             },
-
             {
                 headers: {Authorization: "Bearer " + token}
             })
