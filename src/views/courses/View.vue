@@ -1,61 +1,24 @@
 <template>
     <b-container fluid ="lg">
         <b-col class = "center mb-5">
-        This is the courses page
+        This is the view course page
         <br>
-        <button class = "mr-5" @click="getCourses()">Get Courses</button>
-        <button class = "" @click="logout()">Logout</button>
-        <button class = "ml-5" @click="toCreate()">Add Course</button>
+        <!-- <button class = "mr-5" @click.prevent="courseGet()">Get Course</button> -->
+        <!-- <button class = "" @click="logout()">Logout</button>
+        <button class = "ml-5" @click="toCreate()">Add Course</button> -->
         </b-col>
 
         <b-row>
         <b-col>
-            <!-- <b-card-group columns>
-            <b-card v-for="course in courses"
-                    v-bind:key="course.id" 
-            >
 
-            <tr>
-                <td>{{course.title}}</td>
-                
-                <td>{{course.code}}</td>
-                
-                <td>{{course.description}}</td>
-            </tr> 
+            <div>
+                <h1>Title: {{courses.title}}</h1>
+                <h1>Code: {{courses.code}}</h1>
+                <h1>Description: {{courses.description}}</h1>
+                <h1>Points: {{courses.points}}</h1>
+                <h1>Level: {{courses.level}}</h1>
+            </div>
 
-            
-            
-            </b-card>
-            </b-card-group>    -->
-
-             <table class ="table center">
-                 
-                 <thead>
-                     <tr>
-                         <th scope ="col">Title</th>
-                         <th scope ="col">Code</th>
-                         <th scope ="col">Description</th>
-                         <th scope ="col"></th>
-                         <th scope ="col"></th>
-                      </tr>
-                 </thead>
-
-                  
-                 <tbody v-for="course in courses"
-                    v-bind:key="course.id" >
-                  
-                     <tr>
-                         <td @click.prevent="toCourse(course.id,course.title)">{{course.title}}</td>
-                         <!-- <td to='/courses'>{{course.title}}</td> -->
-                         <td>{{course.code}}</td>
-                         <td>{{course.description}}</td> 
-                         <td><b-button name = "edit" class = "float-right" variant="primary">Edit</b-button></td>
-                         <td><b-button name ="delete" class = "float-right" variant="danger" @click.prevent ="deleteCourse(course.id)">Delete</b-button></td>
-                     </tr>
-             
-
-                </tbody>
-             </table>
         </b-col>
         </b-row>
     </b-container>
@@ -65,18 +28,19 @@
 import axios from 'axios'
 
     export default {
-        name: 'CourseIndex',
+        name: 'CourseView',
         components: {
 
         },
      data(){
          return{
             courses: []
+
         }
      },
 
     mounted(){
-
+        this.courseGet();        
     },
 
      methods :{
@@ -97,6 +61,27 @@ import axios from 'axios'
 
                 console.log(error.response.data)
             })  
+         },
+
+         courseGet(){
+             let token = localStorage.getItem('token');
+
+           axios.get('http://college.api:8000/api/courses/'+this.$route.params.id,
+           {
+               headers: {Authorization: "Bearer " + token}
+           })
+          
+            .then(response => {
+                console.log(response.data);
+                // default is nothing
+                this.courses = response.data.data
+            })
+
+            .catch(error => {
+                console.log(error)
+
+                console.log(error.response.data)
+            }) 
          },
 
          toCreate(){
@@ -129,9 +114,8 @@ import axios from 'axios'
 
          },
 
-         toCourse(id,title){
-             this.$router.push('courses/'+id);
-             alert('you are viewing '+title);
+         toCourse(id){
+             this.$router.push('http://college.api:8000/api/courses/'+id);
          },
 
          logout() {

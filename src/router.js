@@ -3,9 +3,12 @@ import Router from 'vue-router'
 import Home from './views/Home'
 import CoursesIndex from './views/courses/Index'
 import CoursesCreate from './views/courses/Create'
+import CourseView from './views/courses/View'
 import EnrolmentsIndex from './views/enrolments/Index'
 import LecturersIndex from './views/lecturers/Index'
 import LecturersCreate from './views/lecturers/Create'
+import LecturerView from './views/lecturers/View'
+
 
 Vue.use(Router)
 // Vue.forceUpdate();
@@ -33,6 +36,12 @@ export default new Router ({
         },
 
         {
+        path:'/courses/:id',
+        name: 'course_view',
+        component: CourseView
+        },
+
+        {
         path:'/enrolments',
         name: 'enrolments_index',
         component: EnrolmentsIndex
@@ -48,6 +57,12 @@ export default new Router ({
         path:'/lecturers/create',
         name: 'lecturers_create',
         component: LecturersCreate
+        },
+
+        {
+        path:'/lecturers/:id',
+        name: 'lecturer_view',
+        component: LecturerView
         },
         
 

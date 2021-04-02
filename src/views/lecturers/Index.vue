@@ -43,7 +43,7 @@
                  <tbody v-for="lecturer in lecturers"
                     v-bind:key="lecturer.id" >
                      <tr>
-                         <td>{{lecturer.name}}</td>
+                         <td @click.prevent="toLecturer(lecturer.id,lecturer.name)">{{lecturer.name}}</td>
                          <td>{{lecturer.email}}</td>
                          <td>{{lecturer.phone}}</td>
 
@@ -120,6 +120,11 @@ import axios from 'axios'
             })  
 
          },
+
+        toLecturer(id,name){
+            this.$router.push('lecturers/'+id)
+            alert("You are viewing "+name)
+        },
 
         toCreate(){
              this.$router.push('/lecturers/create');
