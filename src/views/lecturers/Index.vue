@@ -10,24 +10,6 @@
 
         <b-row>
         <b-col>
-            <!-- <b-card-group columns>
-            <b-card v-for="course in courses"
-                    v-bind:key="course.id" 
-            >
-
-            <tr>
-                <td>{{course.title}}</td>
-                
-                <td>{{course.code}}</td>
-                
-                <td>{{course.description}}</td>
-            </tr> 
-
-            
-            
-            </b-card>
-            </b-card-group>    -->
-
              <table class ="table center">
                  
                  <thead>
@@ -43,11 +25,11 @@
                  <tbody v-for="lecturer in lecturers"
                     v-bind:key="lecturer.id" >
                      <tr>
-                         <td @click.prevent="toLecturer(lecturer.id,lecturer.name)">{{lecturer.name}}</td>
+                         <td @click.prevent="toLecturer(lecturer.id,lecturer.name)"><a href = "#">{{lecturer.name}}</a></td>
                          <td>{{lecturer.email}}</td>
                          <td>{{lecturer.phone}}</td>
 
-                         <td><b-button class = "float-right" variant="primary">Edit</b-button></td>
+                         <td><b-button class = "float-right" variant="primary" @click.prevent="editLecturer(lecturer.id)">Edit</b-button></td>
                          <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteCourse(lecturer.id)">Delete</b-button></td> 
                      </tr>
                 </tbody>
@@ -126,6 +108,11 @@ import axios from 'axios'
             alert("You are viewing "+name)
         },
 
+        editLecturer(id,title){
+             this.$router.push('lecturers/edit/'+id);
+             alert('you are viewing '+title);
+         },
+
         toCreate(){
              this.$router.push('/lecturers/create');
          },
@@ -160,5 +147,9 @@ import axios from 'axios'
     .center {
     text-align: center;
     margin: auto;
+    }
+
+    a:link{
+        color:black;
     }
 </style>

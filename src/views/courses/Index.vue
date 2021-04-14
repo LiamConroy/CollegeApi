@@ -10,23 +10,6 @@
 
         <b-row>
         <b-col>
-            <!-- <b-card-group columns>
-            <b-card v-for="course in courses"
-                    v-bind:key="course.id" 
-            >
-
-            <tr>
-                <td>{{course.title}}</td>
-                
-                <td>{{course.code}}</td>
-                
-                <td>{{course.description}}</td>
-            </tr> 
-
-            
-            
-            </b-card>
-            </b-card-group>    -->
 
              <table class ="table center">
                  
@@ -45,12 +28,12 @@
                     v-bind:key="course.id" >
                   
                      <tr>
-                         <td @click.prevent="toCourse(course.id,course.title)">{{course.title}}</td>
+                         <td @click.prevent="toCourse(course.id,course.title)"><a href = "#">{{course.title}}</a></td>
                          <!-- <td to='/courses'>{{course.title}}</td> -->
                          <td>{{course.code}}</td>
                          <td>{{course.description}}</td> 
-                         <td><b-button name = "edit" class = "float-right" variant="primary">Edit</b-button></td>
-                         <td><b-button name ="delete" class = "float-right" variant="danger" @click.prevent ="deleteCourse(course.id)">Delete</b-button></td>
+                         <td><b-button name = "edit" class = "float-right" variant="primary" @click.prevent="editCourse(course.id)">Edit</b-button></td>
+                         <td><b-button name ="delete" class = "float-right" variant="danger" @click.prevent ="deleteEnrolments(course, course.id)">Delete</b-button></td>
                      </tr>
              
 
@@ -71,12 +54,13 @@ import axios from 'axios'
         },
      data(){
          return{
-            courses: []
+            courses: [],
+            enrolments: []
         }
      },
 
     mounted(){
-
+        this.getEnrolments();
     },
 
      methods :{
@@ -99,26 +83,16 @@ import axios from 'axios'
             })  
          },
 
-         toCreate(){
-             this.$router.push('/courses/create');
-         },
+         getEnrolments(){
+           let token = localStorage.getItem('token');
 
-         deleteCourse:function(id){
-            let token = localStorage.getItem('token');
-
-            confirm('Are you sure you want to delete ${name}');
-             //Window.confirm("Are you sure you want to delete this course?");
-            //  axios.delete('http://college.api:8000/api/courses/', +id )
-            
-            axios.delete('http://college.api:8000/api/courses/'+id,
-            {headers: {Authorization: "Bearer " + token}},
-            {action:'destroy'
-            })
-            
-             .then(response => {
+           axios.get('http://college.api:8000/api/enrolments',{
+               headers: {Authorization: "Bearer " + token}
+           })
+            .then(response => {
                 console.log(response.data);
                 // default is nothing
-                this.courses = response.data.data
+                this.enrolments = response.data.data
             })
 
             .catch(error => {
@@ -129,8 +103,45 @@ import axios from 'axios'
 
          },
 
+deleteEnrolments(course,id) {
+      let token = localStorage.getItem("token");
+  
+        // loop through enrolments and send delete request to delete them
+        course.enrolments.forEach((enrolment) => {
+        axios
+          .delete("http://college.api:8000/api/enrolments/" + enrolment.id, {
+            headers: { Authorization: "Bearer " + token }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
+     // delete course or lecturer
+      axios
+        .delete("http://college.api:8000/api/courses/" +id, {
+          headers: { Authorization: "Bearer " + token }
+        })
+        .then(function(response) {
+            course = response.data.data
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+         toCreate(){
+             this.$router.push('/courses/create');
+         },
+
+         
+
          toCourse(id,title){
              this.$router.push('courses/'+id);
+             alert('you are viewing '+title);
+         },
+
+        editCourse(id,title){
+             this.$router.push('courses/edit/'+id);
              alert('you are viewing '+title);
          },
 
@@ -164,5 +175,9 @@ import axios from 'axios'
     .center {
     text-align: center;
     margin: auto;
+    }
+
+    a:link{
+        color:black;
     }
 </style>

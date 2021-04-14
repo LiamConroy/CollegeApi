@@ -6,21 +6,6 @@
             <b-nav-item to="/courses">Courses</b-nav-item>
             <b-nav-item to="/enrolments">Enrolments</b-nav-item>
             <b-nav-item to="/lecturers">Lecturers</b-nav-item>
-            <!-- <b-nav-item-dropdown text ="User" class = "user" right>
-                <b-dropdown-item hre>Account</b-dropdown-item>
-            </b-nav-item-dropdown> -->
-
-             <b-nav-item>
-            <b-nav-item-dropdown class = "user" right>
-          <!-- Using 'button-content' slot -->
-          <template #button-content>
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#">Account</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
-        </b-nav-item>
-            
         </b-navbar>
         <!-- </b-container> -->
     </div>

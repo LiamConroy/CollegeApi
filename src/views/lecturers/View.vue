@@ -1,21 +1,23 @@
 <template>
     <b-container fluid ="lg">
-        <b-col class = "center mb-5">
-        This is the view lecturer page
-        <br>
-        <!-- <button class = "mr-5" @click.prevent="courseGet()">Get Course</button> -->
-        <!-- <button class = "" @click="logout()">Logout</button>
-        <button class = "ml-5" @click="toCreate()">Add Course</button> -->
-        </b-col>
-
+        
         <b-row>
-        <b-col>
+        <b-col class = "mt-5">
 
             <div>
-                <h1>Name: {{lecturers.name}}</h1>
-                <h1>Address: {{lecturers.address}}</h1>
-                <h1>Email Address: {{lecturers.email}}</h1>
-                <h1>Phone Number: {{lecturers.phone}}</h1>
+                <div class = "col-lg-6 float-left border">
+                <h1>{{lecturers.name}} </h1>
+                <h2>{{lecturers.address}}</h2>
+                <p>Description: {{lecturers.email}}</p>
+            </div>
+
+            <div class = "col-lg-6 float-left border padding">
+                <h1>Points: {{lecturers.phone}}</h1>
+                
+                  
+            </div>
+            <b-button name ="delete" class = "ml-1 mt-1 float-right" variant="danger" @click.prevent ="deleteLecturerSingle(lecturers.id)">Delete</b-button>    
+            <b-button name = "edit" class = "float-right mt-1" variant="primary" @click.prevent="editLecturer(lecturers.id)" >Edit</b-button>   
             </div>
 
         </b-col>
@@ -43,24 +45,6 @@ import axios from 'axios'
     },
 
      methods :{
-        //  getCourses(){
-        //    let token = localStorage.getItem('token');
-
-        //    axios.get('http://college.api:8000/api/courses',{
-        //        headers: {Authorization: "Bearer " + token}
-        //    })
-        //     .then(response => {
-        //         console.log(response.data);
-        //         // default is nothing
-        //         this.courses = response.data.data
-        //     })
-
-        //     .catch(error => {
-        //         console.log(error)
-
-        //         console.log(error.response.data)
-        //     })  
-        //  },
 
          lecturerGet(){
              let token = localStorage.getItem('token');
@@ -87,14 +71,19 @@ import axios from 'axios'
              this.$router.push('/courses/create');
          },
 
-         deleteCourse:function(id){
+         editLecturer(id,title){
+             this.$router.push('/lecturers/edit/'+id);
+             alert('you are viewing '+title);
+         },
+
+         deleteLecturerSingle(){
             let token = localStorage.getItem('token');
 
             confirm('Are you sure you want to delete ${name}');
              //Window.confirm("Are you sure you want to delete this course?");
             //  axios.delete('http://college.api:8000/api/courses/', +id )
             
-            axios.delete('http://college.api:8000/api/courses/'+id,
+            axios.delete('http://college.api:8000/api/lecturers/'+this.$route.params.id,
             {headers: {Authorization: "Bearer " + token}},
             {action:'destroy'
             })
@@ -110,6 +99,8 @@ import axios from 'axios'
 
                 console.log(error.response.data)
             })  
+
+            this.$router.push('/lecturers');
 
          },
 
