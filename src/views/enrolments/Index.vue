@@ -7,7 +7,6 @@
         <br>
         <button class = "mr-5" @click="getEnrolments()">Get Enrolemts</button>
         <button class = "" @click="toCreate()">Add Enrolments</button>
-        <button class = "ml-5" @click="logout()">Logout</button>
         </b-col>
 
         <b-row>
@@ -105,7 +104,7 @@ import axios from 'axios'
          deleteEnrolment:function(id){
             let token = localStorage.getItem('token');
 
-            confirm('Are you sure you want to delete ${name}');
+            confirm('Are you sure you want to delete');
              //Window.confirm("Are you sure you want to delete this course?");
             //  axios.delete('http://college.api:8000/api/courses/', +id )
             
@@ -140,27 +139,6 @@ import axios from 'axios'
              this.$router.push('enrolments/edit/'+id);
              alert('you are viewing '+title);
          },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.enrolments = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
 
     },
 

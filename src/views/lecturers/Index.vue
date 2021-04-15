@@ -30,7 +30,7 @@
                          <td>{{lecturer.phone}}</td>
 
                          <td><b-button class = "float-right" variant="primary" @click.prevent="editLecturer(lecturer.id)">Edit</b-button></td>
-                         <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteCourse(lecturer.id)">Delete</b-button></td> 
+                         <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteCourse(lecturer)">Delete</b-button></td> 
                      </tr>
                 </tbody>
              </table>
@@ -78,31 +78,29 @@ import axios from 'axios'
             })  
          },
 
-         deleteCourse:function(id){
-            let token = localStorage.getItem('token');
+deleteEnrolments(lecturer) {
 
-             //Window.confirm("Are you sure you want to delete this course?");
-            //  axios.delete('http://college.api:8000/api/courses/', +id )
-            
-            axios.delete('http://college.api:8000/api/lecturers/'+id,
-            {headers: {Authorization: "Bearer " + token}},
-            {action:'destroy'
-            })
-            
-             .then(response => {
-                console.log(response.data);
-                // default is nothing
-                this.courses = response.data.data
-            })
+    let token = localStorage.getItem("token");
+      let listOfDeleteRequests = lecturer.enrolments.map((current) => axios.delete("http://college.api:8000/api/enrolments/" +
+      current.id, {headers: { Authorization: "Bearer " + token }}
+    ));
+        // log the contents of listOfDeleteRequests
+      axios.all(listOfDeleteRequests)
+      .then(function(response) {
+        console.log(response);
+        axios.delete("http://college.api:8000/api/lecturers/" + lecturer.id, 
+        {headers: { Authorization: "Bearer " + token }
+        })
+        .then(function(response) {
+         console.log(response.data);
+         lecturer = response.data.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      });
 
-            .catch(error => {
-                console.log(error)
-
-                console.log(error.response.data)
-            })  
-
-         },
-
+    },
         toLecturer(id,name){
             this.$router.push('lecturers/'+id)
             alert("You are viewing "+name)
@@ -116,27 +114,6 @@ import axios from 'axios'
         toCreate(){
              this.$router.push('/lecturers/create');
          },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
 
     },
         
