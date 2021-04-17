@@ -1,15 +1,17 @@
 <template>
     <b-container fluid ="lg">
-        <b-col class = "center mb-5">
-        This is the Lecturers page
-        <br>
-        <button class = "mr-5" @click="getLecturers()">Get Lecturers</button>
-        <button class = "" @click="logout()">Logout</button>
-        <button class = "ml-5" @click="toCreate()">Add Lecturer</button>
-        </b-col>
+<div class  = "col-lg-12 mt-4">
+    <div class = "col-md-6">
+        <h3 class = "float-left">Lecturers</h3>
+        </div>
 
-        <b-row>
-        <b-col>
+        <div class = "mt-2 mb-3" style="gray;height:30px;">
+        <div style="float:left;line-height:30px;"></div>
+
+        <b-button variant = "primary" style="float: right;" @click.prevent="toCreate()">Create Lecturers</b-button>
+    </div>
+</div>
+<div class = "col-lg-12">
              <table class ="table center">
                  
                  <thead>
@@ -34,8 +36,9 @@
                      </tr>
                 </tbody>
              </table>
-        </b-col>
-        </b-row>
+</div>
+        <!-- </b-col>
+        </b-row> -->
     </b-container>
 </template>
 
@@ -55,7 +58,7 @@ import axios from 'axios'
      },
 
     mounted(){
-        
+        this.getLecturers();        
     },
 
      methods :{

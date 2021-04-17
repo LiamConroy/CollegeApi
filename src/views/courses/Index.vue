@@ -1,14 +1,23 @@
 <template>
     <b-container fluid ="lg">
-        <b-col class = "center mb-5">
-        This is the courses page
-        <br>
-        <button class = "mr-5" @click="getCourses()">Get Courses</button>
-        <button class = "ml-5" @click="toCreate()">Add Course</button>
-        </b-col>
+        
 
-        <b-row>
-        <b-col>
+<div class  = "col-lg-12 mt-4">
+        <div class = "col-md-6">
+        <h3 class = "float-left">Courses</h3>
+        </div>
+
+    <div class = "mt-2 mb-3" style="gray;height:30px;">
+    <div style="float:left;line-height:30px;"></div>
+
+    <b-button variant = "primary" style="float: right;" @click.prevent="toCreate()">Create Course</b-button>
+
+    </div>
+</div>
+        
+<div class = "col-lg-12">
+        <!-- <b-row>
+        <b-col> -->
 
              <table class ="table center">
                  
@@ -37,8 +46,9 @@
 
                 </tbody>
              </table>
-        </b-col>
-        </b-row>
+        <!-- </b-col>
+        </b-row> -->
+</div>    
     </b-container>
 </template>
 
@@ -57,7 +67,7 @@ import axios from 'axios'
      },
 
     mounted(){
-        
+        this.getCourses();
     },
 
      methods :{
@@ -152,4 +162,11 @@ import axios from 'axios'
     a:link{
         color:black;
     }
+
+    .buttons{
+        float: right;
+        overflow: auto;
+    } 
+
+    
 </style>

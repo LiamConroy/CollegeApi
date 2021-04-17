@@ -1,28 +1,50 @@
 <template>
     <b-container fluid ="lg">
-        <b-col class = "center mb-5">
-        
 
-        </b-col>
-
-        <b-row>
-        <b-col>
-
-            <div class = "col-lg-6 float-left border">
-                <h1>{{courses.title}} </h1>
-                <h2>{{courses.code}}</h2>
-                <p>Description: {{courses.description}}</p>
+        <div class = "col-lg-12">
+            
+            <div class = "col-md-6 mt-3 pb-1 pt-1 titleStyle ">
+                <h3>{{courses.title}}</h3>
             </div>
 
-            <div class = "col-lg-6 float-left border padding">
-                <h1>Points: {{courses.points}}</h1>
-                <h1>Level: {{courses.level}}</h1>
-                  
+            <div class = "col-md-6 center pl-0 pr-0 ">
+                <div class = "card cards card1">
+                    <div class = "card-body">
+                        <div class = "col-sm-4 float-left pl-0">
+                        <h4 class = "float-left">Code:</h4>
+                        <p class = "float-left pl-1 pt-1">{{courses.code}}</p>
+
+                        <h4 class = "float-left">Level:</h4>
+                        <p class = "float-left pl-1 pt-1">{{courses.level}}</p>
+                        </div>
+
+                        <div class = "col-sm-6 float-right pr-0">
+                        <p class = "float-right pl-1 pt-1">{{courses.points}}</p>
+                        <h4 class = "float-right">Points:</h4>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
-            <b-button name ="delete" class = "ml-1 mt-1 float-right" variant="danger" @click.prevent ="deleteCourseSingle(courses.id)">Delete</b-button>    
-            <b-button name = "edit" class = "float-right mt-1" variant="primary" @click.prevent ="editCourse(courses.id)">Edit</b-button>        
-        </b-col>
-        </b-row>
+
+            <div class = "col-md-6 pb-1 pt-1 titleStyle">
+                <h4>Description</h4>
+            </div>
+            <div class = "col-md-6 center pl-0 pr-0">
+                
+                <div class = "card cards card2">
+                    <div class = "card-body">
+                        <p class = "paraStyle">{{courses.description}}</p>
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class = "col-lg-6 center">
+             <b-button name ="delete" class = "ml-1 mt-1 float-right" variant="danger" @click.prevent ="deleteCourseSingle(courses.id)">Delete</b-button>    
+            <b-button name = "edit" class = "float-right mt-1 ml-5" variant="primary" @click.prevent ="editCourse(courses.id)">Edit</b-button>   
+            </div>
+        </div>
     </b-container>
 </template>
 
@@ -158,6 +180,12 @@ import axios from 'axios'
     margin: auto;
     }
 
+    .titleStyle{
+        margin-left: 270px;
+        background-color: teal;
+        color: white;
+    }
+
     .border{
         border:1px solid black;  
     }
@@ -165,4 +193,22 @@ import axios from 'axios'
     .padding{
         padding-bottom: 77.5px;
     }
+
+    .card1{
+        border-bottom:0px;
+        border-top:0px;
+    }
+    
+    .card2{
+        border-top:0px;
+    }
+    .cards{
+        border-radius: 0px;
+        border-width: 2px;
+    }
+
+    .paraStyle{
+        text-align:left;
+    }
+
 </style>

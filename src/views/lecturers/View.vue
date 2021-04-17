@@ -1,7 +1,7 @@
 <template>
     <b-container fluid ="lg">
         
-        <b-row>
+        <!-- <b-row>
         <b-col class = "mt-5">
 
             <div>
@@ -21,7 +21,41 @@
             </div>
 
         </b-col>
-        </b-row>
+        </b-row> -->
+
+        <div class = "col-lg-12">
+            
+            <div class = "col-md-6 mt-3 pb-1 pt-1 titleStyle ">
+                <h3>{{lecturers.name}}</h3>
+            </div>
+
+            <div class = "col-md-6 center pl-0 pr-0 ">
+                <div class = "card cards card3">
+                    <div class = "card-body">
+                        <!-- <div class = "col-sm-6 float-left pl-0"> -->
+                        <h4 class = "float-left">Home Address:</h4>
+                        <p class = "float-left pl-1 pt-1">{{lecturers.address}}</p>
+
+                        <h4 class = "float-left">Email Address:</h4>
+                        <p class = "float-left pl-1 pt-1">{{lecturers.email}}</p>
+
+                        <div class = "float-left">
+                        <h4 class = "float-left">Phone Number:</h4>
+                        <p class = "float-left pl-1 pt-1">{{lecturers.phone}}</p> 
+                        </div>
+                        <!-- </div> -->
+
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class = "col-lg-6 center">
+             <b-button name ="delete" class = "ml-1 mt-1 float-right" variant="danger" @click.prevent ="deleteLecturerSingle(lecturers.id)">Delete</b-button>    
+            <b-button name = "edit" class = "float-right mt-1" variant="primary" @click.prevent="editLecturer(lecturers.id)" >Edit</b-button>      
+            </div>
+        </div>
     </b-container>
 </template>
 
@@ -138,5 +172,10 @@ import axios from 'axios'
     .center {
     text-align: center;
     margin: auto;
+    }
+
+    .card3{
+        border-width: 2px;
+        border-top: 0px;
     }
 </style>

@@ -1,11 +1,11 @@
 <template>
 <div class = "col-lg-12 mt-5">
     <div class ="home col-md-4">
-        <div class = "card">
+        <div class = "card shadow">
             <div class = "nopad pl-2 title">
                 <h3>Login</h3>
             </div>
-    <div class = "card-body back">
+    <div class = "card-body back shadow">
 
         <div class = "col-lg-12 form"> 
             <!-- <h4>Email:</h4> -->
@@ -104,8 +104,8 @@ import axios from 'axios'
         color:white;
     }
 
-    .card{
-        box-shadow: 0px 5px 22px 5px rgba(0,0,0,0.25);
+    .shadow{
+        box-shadow: 0px 6px 50px 6px rgba(0,0,0,0.25);
     }
 
     .form{

@@ -1,34 +1,18 @@
 <template>
-    <b-container fluid ="lg">
-        <b-col class = "center mb-5">
-        This is the Enrolemts Page
+<b-container fluid ="lg">
+    <div class  = "col-lg-12 mt-4">
+    <div class = "col-md-6">
+        <h3 class = "float-left">Enrolments</h3>
+        </div>
 
-       davinki: {{courses.title}}
-        <br>
-        <button class = "mr-5" @click="getEnrolments()">Get Enrolemts</button>
-        <button class = "" @click="toCreate()">Add Enrolments</button>
-        </b-col>
+        <div class = "mt-2 mb-3" style="gray;height:30px;">
+        <div style="float:left;line-height:30px;"></div>
 
-        <b-row>
-        <b-col>
-            <!-- <b-card-group columns>
-            <b-card v-for="course in courses"
-                    v-bind:key="course.id" 
-            >
+        <b-button variant = "primary" style="float: right;" @click.prevent="toCreate()">Create Enroments</b-button>
 
-            <tr>
-                <td>{{course.title}}</td>
-                
-                <td>{{course.code}}</td>
-                
-                <td>{{course.description}}</td>
-            </tr> 
-
-            
-            
-            </b-card>
-            </b-card-group>    -->
-
+    </div>
+</div>
+<div class = "col-lg-12">
              <table class ="table center">
                  
                  <thead>
@@ -56,8 +40,9 @@
                      </tr>
                 </tbody>
              </table>
-        </b-col>
-        </b-row>
+</div>
+        <!-- </b-col>
+        </b-row> -->
     </b-container>
 </template>
 
@@ -77,7 +62,7 @@ import axios from 'axios'
      },
 
     mounted(){
-
+        this.getEnrolments();
     },
 
      methods :{

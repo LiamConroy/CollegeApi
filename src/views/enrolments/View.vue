@@ -1,7 +1,7 @@
 <template>
     <b-container fluid ="lg">
         
-        <b-row>
+        <!-- <b-row>
         <b-col class = "mt-5">
 
             <div>
@@ -22,7 +22,56 @@
             </div>
 
         </b-col>
-        </b-row>
+        </b-row> -->
+
+        <div class = "col-lg-12">
+            
+            <div class = "col-md-6 mt-3 pb-1 pt-1 titleStyle ">
+                <h3>Enrolment Information</h3>
+            </div>
+
+            <div class = "col-md-6 center pl-0 pr-0 ">
+                <div class = "card cards card3">
+                    <div class = "card-body">
+                        <!-- <div class = "col-sm-6 float-left pl-0"> -->
+                        <div class = "col-sm-12 float-left">
+                            <h4 class = "float-left">Date:</h4>
+                            <p class = "float-left pt-1 pl-1">{{enrolments.date}}</p>
+                        </div>
+
+                        <div class = "col-sm-12 float-left">
+                            <h4 class = "float-left">Time:</h4>
+                            <p class = "float-left pt-1 pl-1">{{enrolments.time}}</p>
+                        </div>
+
+                        <div class = "col-sm-12">
+                            <h4 class = "float-left">Status:</h4>
+                            <p class = "float-left pt-1 pl-1">{{enrolments.status}}</p>
+                        </div>
+
+                        <div class = "col-sm-12 float-left">
+                            <h4 class = "float-left">Course id:</h4>
+                            <p class = "float-left pt-1 pl-1">{{enrolments.course_id}}</p>
+                        </div>
+
+                        <div class = "col-sm-12">
+                            <h4 class = "float-left">Lecturer id:</h4>
+                            <p class = "float-left pt-1 pl-1">{{enrolments.lecturer_id}}</p>
+                        </div>
+
+                        <!-- </div> -->
+
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class = "col-lg-6 center">
+             <b-button name ="delete" class = "ml-1 mt-1 float-right" variant="danger" @click.prevent ="deleteLecturerSingle(lecturers.id)">Delete</b-button>    
+            <b-button name = "edit" class = "float-right mt-1" variant="primary" @click.prevent="editLecturer(lecturers.id)" >Edit</b-button>      
+            </div>
+        </div>
     </b-container>
 </template>
 
