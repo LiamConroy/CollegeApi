@@ -18,6 +18,12 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+
+### Login information
+Once setup you will need the following to login to the site
+Email: sam@bloggs.com
+Password: secret
+
 ```
 
 ### Customize configuration
