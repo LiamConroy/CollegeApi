@@ -23,7 +23,12 @@ npm run lint
 Once setup you will need the following to login to the site
 Email: sam@bloggs.com
 Password: secret
-
+```
+### Login information
+```
+Once setup you will need the following to login to the site
+Email: sam@bloggs.com
+Password: secret
 ```
 
 ### Customize configuration
