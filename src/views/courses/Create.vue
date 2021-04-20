@@ -85,14 +85,16 @@ import axios from 'axios'
              .then(response => {
                 console.log(response.data);
                 this.courses = response.data.data
+                this.$router.push('/courses'); 
             })
 
             .catch(error => {
                 console.log(error)
                 console.log(error.response.data)
+                alert(error.response.data)
             }) 
             
-            this.$router.push('/courses'); 
+           
          },
 
 

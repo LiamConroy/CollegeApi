@@ -106,6 +106,7 @@ import axios from 'axios'
             .then(function(response) {
             console.log(response.data);
             course = response.data.data;
+            window.location.reload()
             })
             .catch(function(error) {
             console.log(error);

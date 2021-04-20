@@ -32,7 +32,7 @@
                          <td>{{lecturer.phone}}</td>
 
                          <td><b-button class = "float-right" variant="primary" @click.prevent="editLecturer(lecturer.id)">Edit</b-button></td>
-                         <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteCourse(lecturer)">Delete</b-button></td> 
+                         <td><b-button class = "float-right" variant="danger" @click.prevent ="deleteEnrolments(lecturer)">Delete</b-button></td> 
                      </tr>
                 </tbody>
              </table>
@@ -76,7 +76,6 @@ import axios from 'axios'
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             })  
          },
@@ -98,6 +97,7 @@ deleteEnrolments(lecturer) {
         .then(function(response) {
          console.log(response.data);
          lecturer = response.data.data;
+         window.location.reload();
         })
         .catch(function(error) {
           console.log(error);

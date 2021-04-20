@@ -99,13 +99,12 @@ import axios from 'axios'
             
              .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.enrolments = response.data.data
+                window.location.reload()
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             })  
 
