@@ -83,6 +83,7 @@ import axios from 'axios'
 
 deleteEnrolments(lecturer) {
 
+    //loops through enrolments, creates new array for deletions, enrolments then deleted at the same time as courses
     let token = localStorage.getItem("token");
       let listOfDeleteRequests = lecturer.enrolments.map((current) => axios.delete("http://college.api:8000/api/enrolments/" +
       current.id, {headers: { Authorization: "Bearer " + token }}
@@ -104,16 +105,19 @@ deleteEnrolments(lecturer) {
       });
 
     },
+        //redirects to view page
         toLecturer(id,name){
             this.$router.push('lecturers/'+id)
             alert("You are viewing "+name)
         },
 
+        //redirects to edit page
         editLecturer(id,title){
              this.$router.push('lecturers/edit/'+id);
              alert('you are viewing '+title);
          },
 
+        //redirects to create page
         toCreate(){
              this.$router.push('/lecturers/create');
          },

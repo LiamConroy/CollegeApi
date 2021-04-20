@@ -1,6 +1,6 @@
 <template>
     <b-container fluid ="lg">
-       
+     
 <form action="" method="POST" @submit.prevent="createCourse()">
         <div class = "form-group mt-5">
             <h3>Title</h3>
@@ -29,7 +29,7 @@
 
         <div class = "form-group mt-3">
             <input type="submit" value="Create Course" class="btn btn-info">
-            <!-- <b-button class = "" variant="primary" @click="createCourse">Submit</b-button> -->
+            
         </div>
 </form>
     </b-container>
@@ -45,8 +45,8 @@ import axios from 'axios'
         },
      data(){
          return{
-            // courses: [],
 
+        //data from form passed to here
             form:{
                title: '',
                code: '',
@@ -65,13 +65,9 @@ import axios from 'axios'
         
 
     createCourse(){
+
+        //inserts data from the form into the database, using axios
              let token = localStorage.getItem('token');
-
-             //axios.get('http://college.api:8000/api/courses',{
-               
-          
-
-             alert("adding davinki");
 
              axios.post('http://college.api:8000/api/courses',{
                  title:this.form.title,
@@ -88,39 +84,17 @@ import axios from 'axios'
 
              .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.courses = response.data.data
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             }) 
             
             this.$router.push('/courses'); 
          },
 
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
 
     },
         

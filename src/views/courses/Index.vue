@@ -16,9 +16,7 @@
 </div>
         
 <div class = "col-lg-12">
-        <!-- <b-row>
-        <b-col> -->
-
+      
              <table class ="table center">
                  
                  <thead>
@@ -31,7 +29,7 @@
                       </tr>
                  </thead>
 
-                  
+                  <!--Loops through courses and displays each one in table  -->
                  <tbody v-for="course in courses"
                     v-bind:key="course.id" >
                      <tr>
@@ -46,8 +44,7 @@
 
                 </tbody>
              </table>
-        <!-- </b-col>
-        </b-row> -->
+
 </div>    
     </b-container>
 </template>
@@ -71,6 +68,8 @@ import axios from 'axios'
     },
 
      methods :{
+
+         //sends get request to database, returns every course in the array
          getCourses(){
            let token = localStorage.getItem('token');
 
@@ -79,44 +78,25 @@ import axios from 'axios'
            })
             .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.courses = response.data.data
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             })  
          },
 
-        //  getEnrolments(){
-        //    let token = localStorage.getItem('token');
-
-        //    axios.get('http://college.api:8000/api/enrolments',{
-        //        headers: {Authorization: "Bearer " + token}
-        //    })
-        //     .then(response => {
-        //         console.log(response.data);
-        //         // default is nothing
-        //         this.enrolments = response.data.data
-        //     })
-
-        //     .catch(error => {
-        //         console.log(error)
-
-        //         console.log(error.response.data)
-        //     })  
-
-        //  },
-
     deleteEnrolments(course) {
 
     let token = localStorage.getItem("token");
+
+        //loops through enrolments, creates new array for deletions, enrolments then deleted at the same time as courses
         let listOfDeleteRequests = course.enrolments.map((current) => axios.delete("http://college.api:8000/api/enrolments/" +
         current.id, {headers: { Authorization: "Bearer " + token }}
         ));
-            // log the contents of listOfDeleteRequests
+        
+        // log the contents of listOfDeleteRequests
         axios.all(listOfDeleteRequests)
         .then(function(response) {
             console.log(response);
@@ -134,15 +114,18 @@ import axios from 'axios'
 
         },
 
+        //redirects to create page
          toCreate(){
              this.$router.push('/courses/create');
          },
 
+         //redirects to view page
          toCourse(id,title){
              this.$router.push('courses/'+id);
              alert('you are viewing '+title);
          },
 
+        //redirects to edit page
         editCourse(id,title){
              this.$router.push('courses/edit/'+id);
              alert('you are viewing '+title);

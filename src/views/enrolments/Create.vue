@@ -12,6 +12,7 @@
             <input type = "time" name = "time" v-model="form.time" placeholder="Course Title" class = "form-control"> 
         </div>
         <div>
+            <!--Loops through courses and displays all of them to a dropdown form --> 
             <label for = "course">Courses</label>
             <select name = "course" id = "course" v-model="form.course_id">
             <option v-for="course in courses"
@@ -24,6 +25,7 @@
         <div>
             <label for = "lecturer">Lecturer</label>
             <select name = "lecturer" id = "lecturer" v-model="form.lecturer_id">
+              <!--Loops through lecturers and displays all of them to a dropdown form -->  
             <option v-for="lecturer in lecturers"
                     v-bind:key="lecturer.id" v-bind:value = "lecturer.id">
             {{lecturer.name}} ({{lecturer.id}})
@@ -51,7 +53,6 @@
 
     <div class = "form-group mt-3">
             <input type="submit" value="Create Enrolment" class="btn btn-info">
-            <!-- <b-button class = "" variant="primary" @click="createCourse">Submit</b-button> -->
         </div>
 </form>
 
@@ -63,7 +64,7 @@
 import axios from 'axios'
 
     export default {
-        name: 'CoursesCreate',
+        name: 'EnrolmentsCreate',
         components: {
 
         },
@@ -88,6 +89,8 @@ import axios from 'axios'
     },
 
      methods :{
+
+         //sends get request to database, returns every course in the array
          getCourses(){
            let token = localStorage.getItem('token');
 
@@ -107,6 +110,7 @@ import axios from 'axios'
             })  
          },
 
+        //sends get request to database, returns every lecturer in the array
          getLecturers(){
            let token = localStorage.getItem('token');
 
@@ -126,14 +130,9 @@ import axios from 'axios'
             })  
          },
 
+    //inserts data from the html form into the database, using axios
     createEnrolment(){
              let token = localStorage.getItem('token');
-
-             //axios.get('http://college.api:8000/api/courses',{
-               
-          
-
-             alert("adding davinki");
 
              axios.post('http://college.api:8000/api/enrolments',{
                  date: this.form.date,
@@ -162,28 +161,6 @@ import axios from 'axios'
             }) 
             
          },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
-
     },
         
 }

@@ -8,13 +8,10 @@
     <div class = "card-body back shadow">
 
         <div class = "col-lg-12 form"> 
-            <!-- <h4>Email:</h4> -->
-
             <span><input type = "email" placeholder = "Email" v-model="form.email" /></span>
         </div>
 
         <div class = "col-lg-12 mt-3 form" > 
-            <!-- <h4>Password:</h4> -->
             <input type = "password" placeholder = "Password" v-model="form.password" /> 
         </div>
 
@@ -24,18 +21,11 @@
 
       </div>
 
-      <!-- <div id="app">
-  <button @click='toggle = !toggle'> click here </button>
-  <div v-show='toggle'>showing</div>
-</div> -->
+     
     </div>
   </div>
 </div>
-    
-<!-- <br>
-      <input type = "email" v-model="form.email" />
-      <input type = "password" v-model="form.password" /> 
-      <button @click = "login()">Submit</button> -->
+
 </template>
 
 <script>
@@ -47,8 +37,7 @@ import axios from 'axios'
         },
      data(){
          return{
-            //  toggle:true,
-
+    
             form:{
                  email: "",
                 password: ""
@@ -59,6 +48,8 @@ import axios from 'axios'
      },
 
      methods :{
+
+         //
          login(){
             axios.post('http://college.api:8000/api/login', {
                 email: this.form.email,

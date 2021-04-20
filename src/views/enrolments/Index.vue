@@ -26,7 +26,8 @@
                          <th scope ="col"></th>
                       </tr>
                  </thead>
-                    
+
+            <!--Loops through enrolments and displays each one in table  -->   
                  <tbody v-for="enrolment in enrolments"
                     v-bind:key="enrolment.id" >
                      <tr>
@@ -66,6 +67,7 @@ import axios from 'axios'
     },
 
      methods :{
+        //sends get request to database, returns every enrolment in the table
          getEnrolments(){
            let token = localStorage.getItem('token');
 
@@ -74,25 +76,22 @@ import axios from 'axios'
            })
             .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.enrolments = response.data.data
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             })  
 
          },
 
+        //sends delete request to database, then deletes from database and returns response
          deleteEnrolment:function(id){
             let token = localStorage.getItem('token');
 
             confirm('Are you sure you want to delete');
-             //Window.confirm("Are you sure you want to delete this course?");
-            //  axios.delete('http://college.api:8000/api/courses/', +id )
-            
+
             axios.delete('http://college.api:8000/api/enrolments/'+id,
             {headers: {Authorization: "Bearer " + token}},
             {action:'destroy'
@@ -112,14 +111,17 @@ import axios from 'axios'
 
          },
 
+    //redirects to create page
          toCreate(){
              this.$router.push('/enrolments/create');
          },
 
+         //redirects to view page
          toEnrolment(id){
             this.$router.push('enrolments/'+id)
         },
 
+        //redirects to edit page
          editEnrolment(id,title){
              this.$router.push('enrolments/edit/'+id);
              alert('you are viewing '+title);

@@ -43,7 +43,7 @@
 import axios from 'axios'
 
     export default {
-        name: 'CourseIndex',
+        name: 'CourseEdit',
         components: {
 
         },
@@ -63,29 +63,11 @@ import axios from 'axios'
 
     mounted(){
         this.courseGet();
-        //  this.getCourses();
     },
 
-     methods :{
-         getCourses(){
-           let token = localStorage.getItem('token');
+     methods :{        
 
-           axios.get('http://college.api:8000/api/courses',{
-               headers: {Authorization: "Bearer " + token}
-           })
-            .then(response => {
-                console.log(response.data);
-                // default is nothing
-                this.courses = response.data.data
-            })
-
-            .catch(error => {
-                console.log(error)
-
-                console.log(error.response.data)
-            })  
-         },
-        
+        //sends get request to database, then displays the response based on id
         courseGet(){
              let token = localStorage.getItem('token');
 
@@ -108,17 +90,10 @@ import axios from 'axios'
                 console.log(error.response.data)
             }) 
          },
-         toCreate(){
-             this.$router.push('/courses/create');
-         },
 
+        //sends put request to database, replaces any change information, based on id
          editCourse(){
              let token = localStorage.getItem('token');
-
-             //axios.get('http://college.api:8000/api/courses',{
-               
-
-             alert("adding davinki");
 
              axios.put('http://college.api:8000/api/courses/'+this.$route.params.id,{
                  title:this.form.title,
@@ -147,33 +122,6 @@ import axios from 'axios'
             
             
          },
-
-         toCourse(id,title){
-             this.$router.push('courses/'+id);
-             alert('you are viewing '+title);
-         },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
-
     },
         
 }

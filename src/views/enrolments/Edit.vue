@@ -51,7 +51,6 @@
 
     <div class = "form-group mt-3">
             <input type="submit" value="Edit Enrolment" class="btn btn-info">
-            <!-- <b-button class = "" variant="primary" @click="createCourse">Submit</b-button> -->
         </div>
 </form>
 
@@ -63,7 +62,7 @@
 import axios from 'axios'
 
     export default {
-        name: 'CoursesCreate',
+        name: 'EnrolmentEdit',
         components: {
 
         },
@@ -89,6 +88,8 @@ import axios from 'axios'
     },
 
      methods :{
+
+        //sends get request to database and returns everything
          getCourses(){
            let token = localStorage.getItem('token');
 
@@ -107,7 +108,8 @@ import axios from 'axios'
                 console.log(error.response.data)
             })  
          },
-
+        
+        //sends get request to database and returns everything
          getLecturers(){
            let token = localStorage.getItem('token');
 
@@ -127,6 +129,7 @@ import axios from 'axios'
             })  
          },
 
+        //sends get request to database, returns based on id
          enrolmentGet(){
              let token = localStorage.getItem('token');
 
@@ -150,6 +153,7 @@ import axios from 'axios'
             }) 
          },
 
+    //sends put request to database, replaces any change information, based on id
     editEnrolment(){
              let token = localStorage.getItem('token');
 
@@ -182,28 +186,6 @@ import axios from 'axios'
             }) 
             
          },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
-
     },
         
 }

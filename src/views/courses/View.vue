@@ -68,25 +68,8 @@ import axios from 'axios'
     },
 
      methods :{
-         getCourses(){
-           let token = localStorage.getItem('token');
 
-           axios.get('http://college.api:8000/api/courses',{
-               headers: {Authorization: "Bearer " + token}
-           })
-            .then(response => {
-                console.log(response.data);
-                // default is nothing
-                this.courses = response.data.data
-            })
-
-            .catch(error => {
-                console.log(error)
-
-                console.log(error.response.data)
-            })  
-         },
-
+         //sends get request to database, then displays the response based on id
          courseGet(){
              let token = localStorage.getItem('token');
 
@@ -97,28 +80,26 @@ import axios from 'axios'
           
             .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.courses = response.data.data
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             }) 
          },
 
+        //redirects to create page
          toCreate(){
              this.$router.push('/courses/create');
          },
 
+         //sends delete request to database based on id   
          deleteCourseSingle(){
             let token = localStorage.getItem('token');
 
             confirm('Are you sure you want to delete ${name}');
-             //Window.confirm("Are you sure you want to delete this course?");
-            //  axios.delete('http://college.api:8000/api/courses/', +id )
-            
+             
             axios.delete('http://college.api:8000/api/courses/'+this.$route.params.id,
             {headers: {Authorization: "Bearer " + token}},
             {action:'destroy'
@@ -126,48 +107,22 @@ import axios from 'axios'
             
              .then(response => {
                 console.log(response.data);
-                // default is nothing
                 this.courses = response.data.data
             })
 
             .catch(error => {
                 console.log(error)
-
                 console.log(error.response.data)
             })  
 
             this.$router.push('/courses');
          },
 
-         toCourse(id){
-             this.$router.push('http://college.api:8000/api/courses/'+id);
-         },
-
+         //redirects to edit page
          editCourse(id,title){
              this.$router.push('/courses/edit/'+id);
              alert('you are viewing '+title);
          },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
 
     },
         

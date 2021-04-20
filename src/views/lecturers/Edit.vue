@@ -57,11 +57,11 @@ import axios from 'axios'
 
     mounted(){
         this.lecturerGet();
-        //  this.getCourses();
     },
 
      methods :{
-         
+
+        //sends get request to database, then displays the response based on id
         lecturerGet(){
              let token = localStorage.getItem('token');
 
@@ -84,15 +84,11 @@ import axios from 'axios'
                 console.log(error.response.data)
             }) 
          },
-         
+
+        //sends put request to database, replaces any change information, based on id
          editLecturer(){
              let token = localStorage.getItem('token');
-
-             //axios.get('http://college.api:8000/api/courses',{
-               
-
-             alert("adding davinki");
-
+            
              axios.put('http://college.api:8000/api/lecturers/'+this.$route.params.id,{
                  name:this.form.name,
                  address:this.form.address,
@@ -119,32 +115,6 @@ import axios from 'axios'
             
             
          },
-
-         toCourse(id,title){
-             this.$router.push('courses/'+id);
-             alert('you are viewing '+title);
-         },
-
-         logout() {
-        let token = localStorage.getItem('token');
-         axios.get('http://college.api:8000/api/logout',{
-               headers: {Authorization: "Bearer " + token}
-        })
-         .then(response => {
-            console.log(response.data);
-            console.log("Logged out");
-            this.courses = response.data.data;
-        })
-
-
-
-        .catch(error => {
-            console.log(error)
-            console.log(error.response.data)
-        })  
-
-        localStorage.removeItem('token');
-    }
 
     },
         
